@@ -1,0 +1,1689 @@
+{
+  "namespace": "com.enel.crossSolution",
+  "definitions": {
+    "Country": {
+      "kind": "type",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ],
+      "@Core.Description": "{i18n>CountryCode.Description}",
+      "@Common.Label": "{i18n>Country}"
+    },
+    "Currency": {
+      "kind": "type",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ],
+      "@Core.Description": "{i18n>CurrencyCode.Description}",
+      "@Common.Label": "{i18n>Currency}"
+    },
+    "Language": {
+      "kind": "type",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ],
+      "@Core.Description": "{i18n>LanguageCode.Description}",
+      "@Common.Label": "{i18n>Language}"
+    },
+    "NearMiss": {
+      "@source": "cat-service.cds",
+      "kind": "service",
+      "@requires": [
+        "authenticated-user",
+        "system-user"
+      ]
+    },
+    "NearMiss.Codelists": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": true,
+      "@Capabilities.UpdateRestrictions.Updatable": true,
+      "@restrict": [
+        {
+          "grant": [
+            "READ"
+          ],
+          "to": "NearMissRead_sc"
+        },
+        {
+          "grant": [
+            "WRITE"
+          ],
+          "to": "NearMissWrite_sc"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "com.enel.crossSolution.Codelists"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "FIELD_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "langu": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "valore": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "group_p": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "text": {
+          "type": "cds.String",
+          "length": 1000
+        },
+        "campo_up": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "valore_up": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "active": {
+          "type": "cds.String",
+          "length": 1
+        }
+      },
+      "$syntax": "projection"
+    },
+    "NearMiss.PAR_COMMAND": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": true,
+      "@Capabilities.UpdateRestrictions.Updatable": true,
+      "@restrict": [
+        {
+          "grant": [
+            "READ"
+          ],
+          "to": "NearMissRead_sc"
+        },
+        {
+          "grant": [
+            "WRITE"
+          ],
+          "to": "NearMissWrite_sc"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "com.enel.crossSolution.par_command"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "comando": {
+          "key": true,
+          "type": "cds.String",
+          "length": 20
+        },
+        "state": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "group_p": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "scope": {
+          "type": "cds.String",
+          "length": 30
+        },
+        "active": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "to_state": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "workflow_definition": {
+          "type": "cds.String",
+          "length": 64
+        },
+        "scope_att": {
+          "type": "cds.String",
+          "length": 1
+        }
+      },
+      "$syntax": "projection"
+    },
+    "NearMiss.ROLE_ATTRIBUTES": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": true,
+      "@Capabilities.UpdateRestrictions.Updatable": true,
+      "@restrict": [
+        {
+          "grant": [
+            "READ"
+          ],
+          "to": "NearMissRead_sc"
+        },
+        {
+          "grant": [
+            "WRITE"
+          ],
+          "to": "NearMissWrite_sc"
+        }
+      ],
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "com.enel.crossSolution.roles_atrributes"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "user": {
+          "key": true,
+          "type": "cds.String",
+          "length": 50
+        },
+        "attribute_name": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30
+        },
+        "attribute_value": {
+          "key": true,
+          "type": "cds.String",
+          "length": 8
+        }
+      },
+      "$syntax": "projection"
+    },
+    "User": {
+      "kind": "type",
+      "type": "cds.String",
+      "length": 255,
+      "@Core.Description": "{i18n>UserID.Description}",
+      "@Common.Label": "{i18n>UserID}"
+    },
+    "com.enel.crossSolution.Codelists": {
+      "kind": "entity",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "FIELD_NAME": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "langu": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "valore": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "group_p": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "text": {
+          "type": "cds.String",
+          "length": 1000
+        },
+        "campo_up": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "valore_up": {
+          "key": true,
+          "type": "cds.String",
+          "length": 15
+        },
+        "active": {
+          "type": "cds.String",
+          "length": 1
+        }
+      }
+    },
+    "com.enel.crossSolution.par_command": {
+      "kind": "entity",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "comando": {
+          "key": true,
+          "type": "cds.String",
+          "length": 20
+        },
+        "state": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "group_p": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4
+        },
+        "scope": {
+          "type": "cds.String",
+          "length": 30
+        },
+        "active": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "to_state": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "workflow_definition": {
+          "type": "cds.String",
+          "length": 64
+        },
+        "scope_att": {
+          "type": "cds.String",
+          "length": 1
+        }
+      }
+    },
+    "com.enel.crossSolution.roles_atrributes": {
+      "kind": "entity",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        },
+        "user": {
+          "key": true,
+          "type": "cds.String",
+          "length": 50
+        },
+        "attribute_name": {
+          "key": true,
+          "type": "cds.String",
+          "length": 30
+        },
+        "attribute_value": {
+          "key": true,
+          "type": "cds.String",
+          "length": 8
+        }
+      }
+    },
+    "cuid": {
+      "kind": "type",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.UUID"
+        }
+      },
+      "$syntax": "aspect"
+    },
+    "localized.sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Countries"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CountryCode}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CurrencyCode}"
+        },
+        "symbol": {
+          "type": "cds.String",
+          "length": 5,
+          "@Common.Label": "{i18n>CurrencySymbol}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Languages"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "@Core.Computed": true,
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 14,
+          "@Common.Label": "{i18n>LanguageCode}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "managed": {
+      "kind": "type",
+      "elements": {
+        "createdAt": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>CreatedAt}"
+        },
+        "createdBy": {
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>CreatedBy}"
+        },
+        "modifiedAt": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "@readonly": true,
+          "type": "cds.Timestamp",
+          "@Core.Computed": true,
+          "@Common.Label": "{i18n>ChangedAt}"
+        },
+        "modifiedBy": {
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "@readonly": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>ChangedBy}"
+        }
+      },
+      "$syntax": "aspect"
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.CodeList": {
+      "kind": "type",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "elements": {
+        "name": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        }
+      },
+      "$syntax": "aspect"
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CountryCode}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@odata.containment.ignore": true,
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CountryCode}"
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CurrencyCode}"
+        },
+        "symbol": {
+          "type": "cds.String",
+          "length": 5,
+          "@Common.Label": "{i18n>CurrencySymbol}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@odata.containment.ignore": true,
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@Common.Label": "{i18n>CurrencyCode}"
+        }
+      }
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "Value": {
+            "=": "name"
+          }
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "key": true,
+          "type": "cds.String",
+          "length": 14,
+          "@Common.Label": "{i18n>LanguageCode}"
+        },
+        "texts": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Languages_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "name": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 255,
+          "@Common.Label": "{i18n>Name}"
+        },
+        "descr": {
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000,
+          "@Common.Label": "{i18n>Description}"
+        },
+        "code": {
+          "@Common.Text": {
+            "=": "name"
+          },
+          "@odata.containment.ignore": true,
+          "key": true,
+          "type": "cds.String",
+          "length": 14,
+          "@Common.Label": "{i18n>LanguageCode}"
+        }
+      }
+    },
+    "temporal": {
+      "kind": "type",
+      "elements": {
+        "validFrom": {
+          "@cds.valid.from": true,
+          "type": "cds.Timestamp"
+        },
+        "validTo": {
+          "@cds.valid.to": true,
+          "type": "cds.Timestamp"
+        }
+      },
+      "$syntax": "aspect"
+    }
+  },
+  "$version": "1.0",
+  "meta": {
+    "creator": "CDS Compiler v1.45.0",
+    "flavor": "inferred"
+  }
+}
